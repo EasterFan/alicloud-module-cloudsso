@@ -1,0 +1,15 @@
+{
+    "contact_group_name": "your_name_here",
+    "contact_web_hook_url": "http://your_link_url.com",
+    "first_contact": {
+        "lang": "zh-cn",
+        "mail": "test_1@test.com",
+        "sms": "12388888888"
+    },
+    "second_contact": {
+        "lang": "zh-cn",
+        "mail": "test_2@test.com",
+        "sms": "12388888899"
+    },
+    "target_account_id": "1129140695538589"
+}
