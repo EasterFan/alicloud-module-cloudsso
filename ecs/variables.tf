@@ -13,15 +13,70 @@ variable "target_account_id" {
 
 
 
+/* =====================================================云SSO=================================================================== */
 
 
 
+/* 云sso中的用户组 */
+variable "sso_user_group" {
+  type = map(object({
+    group_name      = string
+    description     = string
+  }))
+  default = {
+    master = {
+      group_name = "NSB-DO-Master"
+      description     = "DO 关键组"
+    }
+    admin = {
+      group_name = "NSB-DO-Admin"
+      description     = "DO 管理员组"
+    }
+    finace = {
+      group_name = "NSB-DO-Finance"
+      description     = "财务组"
+    }
+    security = {
+      group_name = "NSB-Security"
+      description     = "安全组"
+    }
+    log = {
+      group_name = "NSB-Log"
+      description     = "日志组"
+    }
+    bgAdmin = {
+      group_name = "NSB-BG-Admin"
+      description     = "BG 部门管理员"
+    }
+  }
+}
 
-/* 云sso中的3个用户 */
-/* variable "sso_users" {
-  type = list(object)
-  default = [{  display_name = "樊东方-SSO", email = ""  },{} ]
-} */
+
+/* 云sso中的用户 */
+variable "sso_users" {
+  type = map(object({
+    user_name = string
+    display_name = string
+    comments     = string
+  }))
+  default = {
+    fdf = {
+      user_name = "fandongfang"
+      display_name = "樊东方"
+      comments     = "云sso用户"
+    }
+    vlh = {
+      user_name = "weiliheng"
+      display_name = "魏立恒"
+      comments     = "云sso用户"
+    }
+    sbb = {
+      user_name = "shenbinbin"
+      display_name = "沈彬彬"
+      comments     = "云sso用户"
+    }
+  }
+}
 
 
 
