@@ -3,19 +3,9 @@ variable "project_name" {
   description = "Project Name"
 }
 
-variable "target_account_id" {
-  # tognzhao
-  default = "209625040857768767"
-  description = "Target account id"
-  type        = string
-}
-
-
 
 
 /* =====================================================云SSO=================================================================== */
-
-
 
 /* 云sso中的用户组 */
 variable "sso_user_group" {
@@ -54,87 +44,58 @@ variable "sso_user_group" {
 
 /* 云sso中的用户 */
 variable "sso_users" {
-  type = map(object({
+  type = list(object({
+    group_name = string
     user_name = string
     display_name = string
     comments     = string
   }))
-  default = {
-    fdf = {
+  default = [
+   {
+      group_name = "NSB-Log"
       user_name = "fandongfang"
       display_name = "樊东方"
       comments     = "云sso用户"
-    }
-    vlh = {
+    },
+    {
+      group_name = "NSB-Log"
+      user_name = "fandongfang2"
+      display_name = "樊东方2"
+      comments     = "云sso用户"
+    },
+    {
+      group_name = "NSB-Security"
       user_name = "weiliheng"
       display_name = "魏立恒"
       comments     = "云sso用户"
-    }
-    sbb = {
+    },
+    {
+      group_name = "NSB-DO-Master"
       user_name = "shenbinbin"
       display_name = "沈彬彬"
       comments     = "云sso用户"
-    }
-  }
+    }]
 }
 
 
 
 /* =====================================================资源目录=================================================================== */
 
-/* Application 目录下的账号 */
-variable "application_account_names" {
+variable "folder_data"{
   type = list(object({
-    key = string,
-    value = string
+    folder_name  = string
+    account_name = string
   }))
-  default = [{key = "bg1p", value = "NSB-BG1-PROD"}, {key = "bg1n", value = "NSB-BG1-NON-PROD"},{key = "bg2p", value = "NSB-BG2-PROD"},{key = "bg2n", value = "NSB-BG2-NON-PROD"}]
+  default = [
+    { folder_name = "Core", account_name = "NSB-DO" },
+    { folder_name = "Core", account_name = "NSB-LOG" },
+    { folder_name = "Core", account_name = "NSB-Security" },
+    { folder_name = "Application", account_name = "NSB-BG1-PROD" },
+    { folder_name = "Application", account_name = "NSB-BG1-NON-PROD" },
+    { folder_name = "Application", account_name = "NSB-BG2-PROD" },
+    { folder_name = "Application", account_name = "NSB-BG2-NON-PROD" }
+  ]
 }
 
-
-/* Core 目录下的账号 */
-variable "account_names" {
-  type = list(object({
-    key = string,
-    value = string
-  }))
-  default = [{key = "infra", value = "NSB-DO"}, {key = "log", value = "NSB-LOG"},{key = "soc", value = "NSB-Security"}]
-}
-
-
-/* 一级资源目录 */
-variable "folder_names" {
-  type = list(string)
-  default = ["Core", "Application"]
-}
 /* ================================================================================================================ */
 
-
-
-variable "contact_group_name" {
-  description = "Name of the contact group"
-  type        = string
-  default     = "default_contact_group"
-}
-
-variable "contact_web_hook_url" {
-  // the address of Function Compute to forward alarms
-  // or for other application integration
-  description = "URL of contact web hook"
-  type        = string
-  default     = "http://nowebhook.com"
-}
-
-
-variable "second_contact" {
-  type = object({
-    mail = string
-    sms  = string
-    lang = string
-  })
-  default = {
-    mail = "test_aliyun_alarm_2@test.com"
-    sms  = "12399999999"
-    lang = "zh-cn"
-  }
-}
