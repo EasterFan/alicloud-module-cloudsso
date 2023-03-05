@@ -1,12 +1,12 @@
 [
 	{
-		"folder_id": "fd-n8VsNvA7PV",
-		"folder_name": "Application",
-		"id": "fd-n8VsNvA7PV"
+		"folder_id": "fd-U1Ol06iWji",
+		"folder_name": "Core",
+		"id": "fd-U1Ol06iWji"
 	},
 	{
-		"folder_id": "fd-tQO9Rt6PPa",
-		"folder_name": "Core",
-		"id": "fd-tQO9Rt6PPa"
+		"folder_id": "fd-0FsnZxhzU1",
+		"folder_name": "Application",
+		"id": "fd-0FsnZxhzU1"
 	}
 ]
