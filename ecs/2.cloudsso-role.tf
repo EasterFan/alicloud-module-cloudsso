@@ -44,7 +44,7 @@ data "alicloud_resource_manager_accounts" "default" {
 
 /* 将分配的权限配置到指定的账号 */
 resource "alicloud_cloud_sso_access_configuration_provisioning" "provisioning" {
-  depends_on = [alicloud_cloud_sso_access_configuration.sso_custom_access, alicloud_cloud_sso_group.sso_user_group]
+  depends_on = [alicloud_cloud_sso_access_configuration.sso_custom_access,alicloud_cloud_sso_access_configuration.sso_system_access, alicloud_cloud_sso_group.sso_user_group]
   for_each = {
     for relation_config in local.sso_relation_configs :
     "${relation_config.account_name}:${relation_config.relation_name}:${relation_config.deploy_target_type}:${relation_config.deploy_target_name}" => relation_config
@@ -174,22 +174,25 @@ resource "alicloud_cloud_sso_group" "sso_user_group" {
 }
 
 locals {
-  directory_id = length(data.alicloud_cloud_sso_directories.get_sso_directories.ids) > 0 ? data.alicloud_cloud_sso_directories.get_sso_directories.ids[0] : concat(alicloud_cloud_sso_directory.default.*.id, [""])[0]
+  directory_id = length(data.alicloud_cloud_sso_directories.get_sso_directories.ids) > 0 ? data.alicloud_cloud_sso_directories.get_sso_directories.ids[0] : concat(alicloud_cloud_sso_directory.fdf-cloudsso-directory.*.id, [""])[0]
 }
 
 /* 使用 cloudsso 前，一定要获取资源目录 */
 data "alicloud_cloud_sso_directories" "get_sso_directories" {
-  depends_on = [data.alicloud_cloud_sso_service.open]
+  depends_on = [alicloud_cloud_sso_directory.fdf-cloudsso-directory]
 }
-resource "alicloud_cloud_sso_directory" "default" {
-  count          = length(data.alicloud_cloud_sso_directories.get_sso_directories.ids) > 0 ? 0 : 1
-  directory_name = "cloudsso-directory"
+
+
+resource "alicloud_cloud_sso_directory" "fdf-cloudsso-directory" {
+  /* count          = length(data.alicloud_cloud_sso_directories.get_sso_directories.ids) > 0 ? 0 : 1 */
+  directory_name = "fdf-cloudsso-directory"
+  depends_on = [data.alicloud_cloud_sso_service.open]
 }
 
 
 /* 开通云sso */
 data "alicloud_cloud_sso_service" "open" {
-  depends_on = [alicloud_resource_manager_account.app_account_bg1p]
+  depends_on = [alicloud_resource_manager_resource_directory.fdf_directory]
   enable = "On"
 }
 
