@@ -6,7 +6,6 @@ locals{
 }
 data "alicloud_resource_manager_folders" "CoreFolder" {
   depends_on = [alicloud_resource_manager_folder.line1_folder]
-  output_file = "./classes.txt"
 }
 
 

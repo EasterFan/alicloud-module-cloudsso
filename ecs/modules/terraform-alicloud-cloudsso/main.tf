@@ -124,14 +124,12 @@ locals {
 data "alicloud_cloud_sso_users" "example" {
   depends_on = [alicloud_cloud_sso_user.sso_user]
   directory_id = local.directory_id
-  output_file = "./classes.txt"
 }
 
 # 获取用户组 ID
 data "alicloud_cloud_sso_groups" "example" {
   depends_on = [alicloud_cloud_sso_group.sso_user_group]
   directory_id = local.directory_id
-  output_file = "./classes.txt"
 }
 
 # 将用户添加到用户组
