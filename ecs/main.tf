@@ -10,12 +10,12 @@ terraform {
 provider "alicloud" {
   access_key = "${var.access_key}"
   secret_key = "${var.secret_key}"
-  region     = "cn-hangzhou"
+  region     = "cn-shanghai"
 
-  endpoints {
+  /* endpoints {
      cloudsso = "cloudsso.cn-shanghai.aliyuncs.com"
-     /* vpc = "vpc-vpc.cn-shanghai.aliyuncs.com" */
-  }
+     vpc = "vpc-vpc.cn-shanghai.aliyuncs.com" 
+  } */
 }
 
 /* provider "alicloud-do" {
@@ -26,6 +26,15 @@ provider "alicloud" {
     session_expiration = 999
   }
 } */
+
+module "resource_manager" {
+    source                  = "./modules/terraform-alicloud-resource_manager-ing"
+}
+
+module "cloudsso" {
+    source                  = "./modules/terraform-alicloud-cloudsso"
+    depends_on = [module.resource_manager]
+}
 
 module "vpc" {
     # source                  = "hanyouqing/vpc/alicloud"

@@ -1,5 +1,3 @@
-
-
 locals {
   sso_relation_configs = flatten([
     for account, relation in var.sso_access_relation_name : [
@@ -33,14 +31,10 @@ data "alicloud_cloud_sso_access_configurations" "access_configurations" {
   directory_id = local.directory_id
 }
 
-data "alicloud_resource_manager_resource_directories" "default" {
-  depends_on = [alicloud_resource_manager_resource_directory.fdf_directory]
-
-}
-
 /* todo: 日后修改成最后一个账号 */
 data "alicloud_resource_manager_accounts" "default" {
-  depends_on = [alicloud_resource_manager_account.app_account_bg1p]
+  /* depends_on = [alicloud_resource_manager_account.app_account_bg1p] */
+   /* depends_on = [module.resource_manager.alicloud_resource_manager_account] */
 }
 
 /* 将分配的权限配置到指定的账号 */
@@ -193,9 +187,6 @@ resource "alicloud_cloud_sso_directory" "fdf-cloudsso-directory" {
 
 /* 开通云sso */
 data "alicloud_cloud_sso_service" "open" {
-  depends_on = [alicloud_resource_manager_resource_directory.fdf_directory]
+  /* depends_on = [alicloud_resource_manager_resource_directory] */
   enable = "On"
 }
-
-
-

@@ -1,6 +1,12 @@
 
 
+/* output "resource_directory_obj" {
+  value = module.resource_manager
+} */
 
+/* output "resource_last_account_obj" {
+  value = module.resource_manager.alicloud_resource_manager_account.app_account_bg1p
+} */
 
 
 

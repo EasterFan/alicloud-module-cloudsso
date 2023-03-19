@@ -1,0 +1,58 @@
+[
+	{
+		"create_time": "2023-03-19T11:34:26Z",
+		"description": "",
+		"directory_id": "d-00a25vtemm75",
+		"display_name": "魏立恒",
+		"email": "",
+		"first_name": "",
+		"id": "d-00a25vtemm75:u-00cyeptvsme9z9g15174",
+		"last_name": "",
+		"provision_type": "Manual",
+		"status": "Enabled",
+		"user_id": "u-00cyeptvsme9z9g15174",
+		"user_name": "weiliheng"
+	},
+	{
+		"create_time": "2023-03-19T11:34:26Z",
+		"description": "",
+		"directory_id": "d-00a25vtemm75",
+		"display_name": "樊东方2",
+		"email": "",
+		"first_name": "",
+		"id": "d-00a25vtemm75:u-00krk2mrraqecevh0y00",
+		"last_name": "",
+		"provision_type": "Manual",
+		"status": "Enabled",
+		"user_id": "u-00krk2mrraqecevh0y00",
+		"user_name": "fandongfang2"
+	},
+	{
+		"create_time": "2023-03-19T11:34:26Z",
+		"description": "",
+		"directory_id": "d-00a25vtemm75",
+		"display_name": "樊东方",
+		"email": "",
+		"first_name": "",
+		"id": "d-00a25vtemm75:u-00a5e9d5bdv4lfl58v18",
+		"last_name": "",
+		"provision_type": "Manual",
+		"status": "Enabled",
+		"user_id": "u-00a5e9d5bdv4lfl58v18",
+		"user_name": "fandongfang"
+	},
+	{
+		"create_time": "2023-03-19T11:34:26Z",
+		"description": "",
+		"directory_id": "d-00a25vtemm75",
+		"display_name": "沈彬彬",
+		"email": "",
+		"first_name": "",
+		"id": "d-00a25vtemm75:u-006np2bbm98m15vl8j23",
+		"last_name": "",
+		"provision_type": "Manual",
+		"status": "Enabled",
+		"user_id": "u-006np2bbm98m15vl8j23",
+		"user_name": "shenbinbin"
+	}
+]
