@@ -14,6 +14,9 @@ variable "tags" {
     }
 }
 
+variable access_key { default = "" }
+variable secret_key { default = "" }
+
 
 /* =====================================================vpc============================================================= */
 
@@ -97,7 +100,17 @@ variable "sso_access_relation_name" {
              target_name      = "NSB-Security"
              deploy_access_list = ["SecurityAdmin"]
           }]
-   }          
+   }   
+       NSB-DO = {
+        sso_relation_name      = "NSB-DO-Rule"
+        description     = "NSB-DO 账号下的权限分配"
+        deploy_user_group = [
+          {
+             target_type      = "User"
+             target_name      = "fandongfang"
+             deploy_access_list = ["Administrator"]
+          }]
+   }       
   }
 }
 
@@ -112,6 +125,11 @@ variable "sso_access" {
   }))
 
   default = {
+    Administrator = {
+      sso_access_name      = "Administrator"
+      description     = "负责账号下的所有权限"
+      system_policy_list = ["AdministratorAccess"]
+   }
     FinaceAdmin = {
       sso_access_name      = "FinaceAdmin"
       description     = "负责管理企业财务 （账单 付款 发票等），由NSB-DO-Admin团队中部分核心成员扮演"

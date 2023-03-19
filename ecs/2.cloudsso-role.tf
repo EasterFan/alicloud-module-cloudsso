@@ -29,6 +29,7 @@ locals {
 }
 
 data "alicloud_cloud_sso_access_configurations" "access_configurations" {
+  depends_on = [alicloud_cloud_sso_access_configuration.sso_system_access, alicloud_cloud_sso_access_configuration.sso_custom_access]
   directory_id = local.directory_id
 }
 

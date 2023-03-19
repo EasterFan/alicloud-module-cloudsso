@@ -90,5 +90,7 @@ resource "alicloud_resource_manager_folder" "line1_folder" {
 # 创建资源目录
 resource "alicloud_resource_manager_resource_directory" "fdf_directory" {
   status = "Disabled"
+  /* 删除成员许可开启 */
+  member_deletion_status = "Enabled"
 }
 

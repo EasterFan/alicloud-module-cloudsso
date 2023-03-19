@@ -2,20 +2,31 @@ terraform {
   required_providers {
     alicloud = {
       source = "alicloud"
+      version = ">= 1.201.2"
     }
   }
 }
 
 provider "alicloud" {
-  access_key = "LTAI5tJptEE1EL94w8xG1qSB"
-  secret_key = "a89REYYYNCdvMU2xYKSBNZgaMCIQkL"
+  access_key = "${var.access_key}"
+  secret_key = "${var.secret_key}"
   region     = "cn-hangzhou"
 
   endpoints {
      cloudsso = "cloudsso.cn-shanghai.aliyuncs.com"
-  } 
+     /* vpc = "vpc-vpc.cn-shanghai.aliyuncs.com" */
+  }
 }
-/* 
+
+/* provider "alicloud-do" {
+  assume_role {
+    role_arn           = "acs:ram::1117678625002664:role/aliyunreservedsso-administrator"
+    policy             = "POLICY"
+    session_name       = "SESSION_NAME"
+    session_expiration = 999
+  }
+} */
+
 module "vpc" {
     # source                  = "hanyouqing/vpc/alicloud"
     source                  = "./modules/terraform-alicloud-vpc"
@@ -28,6 +39,6 @@ module "vpc" {
     vpc_sg_policy_ssh       = var.vpc_sg_policy_ssh
     vpc_sg_policy_http      = var.vpc_sg_policy_http
     vpc_sg_policy_https     = var.vpc_sg_policy_https
-
     tags = var.tags
-} */
+    region     = "cn-shanghai"
+}
