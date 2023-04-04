@@ -1,13 +1,5 @@
 /* 跨 region 访问，AKSK 写死不太好，后面想办法从 main.tf 中，将 provider 整个传过来 */
 
-/* this module base on https://github.com/hanyouqing/terraform-alicloud-vpc */
-
-provider "alicloud" {
-  region     = var.region
-  access_key = "LTAI5tHWYiMGrXBQb8qqq9uj"
-  secret_key = "23C1PGI80p6MeR8E1zO3QrWXVgJPCv"
-}
-
 resource "alicloud_vpc" "infra" {
   vpc_name    = var.vpc_name
   description = var.vpc_description

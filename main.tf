@@ -11,11 +11,6 @@ provider "alicloud" {
   access_key = var.access_key
   secret_key = var.secret_key
   region     = "cn-shanghai"
-
-  /* endpoints {
-     cloudsso = "cloudsso.cn-shanghai.aliyuncs.com"
-     vpc = "vpc-vpc.cn-shanghai.aliyuncs.com" 
-  } */
 }
 
 module "resource_manager" {
@@ -27,7 +22,7 @@ module "cloudsso" {
   depends_on = [module.resource_manager]
 }
 
-/* module "vpc_hub" {
+module "vpc_hub" {
   # source                  = "hanyouqing/vpc/alicloud"
   source                  = "./modules/terraform-alicloud-vpc"
   vpc_name                = var.vpc_name
@@ -41,7 +36,7 @@ module "cloudsso" {
   vpc_sg_policy_https     = var.vpc_sg_policy_https
   tags                    = var.tags
   region                  = "cn-shanghai"
-} */
+}
 
 /* module "vpc_prd" {
   source                  = "./modules/terraform-alicloud-vpc"
