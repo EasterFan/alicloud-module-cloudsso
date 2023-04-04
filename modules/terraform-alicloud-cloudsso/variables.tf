@@ -1,7 +1,3 @@
-
-
-
-
 variable "region" {
   default = ""
 }
