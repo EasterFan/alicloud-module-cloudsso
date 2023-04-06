@@ -1,107 +1,121 @@
-# @reference:
-#   https://www.terraform.io/docs/configuration/variables.html
-#
-# @load order: (later overide earlier)
-#   environment variables
-#   terraform.tfvars
-#   terraform.tfvars.json
-#   *.auto.tfvars / *.auto.tfvars.json
-#   -var / -var-file
-#
-
-variable "access_key" { default = "" }
-variable "secret_key" { default = "" }
-
-variable "region" { default = "" }      # takes region id as workspace name
-variable "region_abbr" { default = "" } # see: https://github.com/hanyouqing/terraform-alicloud-infra/blob/master/variables.tf#L35
-
-variable "vpc_name" { default = "" }
-variable "vpc_description" { default = "" }
-variable "vpc_cidr_block" { default = "" } # 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
-variable "vpc_availability_zone" { default = "" }
-variable "vpc_inner_access_policy" { default = "" }
-variable "vpc_whitelist_ips" { default = "" }
-variable "vpc_sg_policy_ssh" { default = "" }
-variable "vpc_sg_policy_http" { default = "" }
-variable "vpc_sg_policy_https" { default = "" }
-
-variable "tags" {
-  default = {
-    environment = "" # develop|testing|staging|production
-    department  = ""
-    project     = ""
-    service     = ""
-    createby    = ""
-    owner       = ""
-    provisioner = ""
-  }
+variable "region" {
+  description = "(Deprecated from version 1.9.0) The region used to launch this module resources."
+  type        = string
+  default     = ""
 }
 
-
-variable "region_alias" {
-  description = "This variable is just a comment used to save time"
-  default = {
-    cn-qingdao     = "qd"   # northchina-1
-    cn-beijing     = "bj"   # northchina-2
-    cn-zhangjiakou = "zjk"  # northchina-3
-    cn-huhehaote   = "hhht" # northchina-4
-    cn-hangzhou    = "hz"   # eastchina-1
-    cn-shanghai    = "sh"   # eastchina-2
-    cn-chengdu     = "cd"   # southwest-1
-    cn-hkongkong   = "hk"   # HongKong
-    ap-northeast-1 = "tyo"  # Tokyo
-    ap-southeast-2 = "sg"   # Singapore
-    ap-southeast-3 = "kl"   # Kuala
-    ap-southeast-5 = "jk"   # Jakarta
-    ap-south-1     = "bom"  # Bombay
-    us-east-1      = "usva" # Virginia
-    us-east-1      = "ussv" # Silicon
-    eu-west-1      = "ldn"  # London
-    eu-central-1   = "ffm"  # Frankfurt
-    me-east-1      = "dxb"  # Dubai
-  }
+variable "profile" {
+  description = "(Deprecated from version 1.9.0) The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable."
+  type        = string
+  default     = ""
 }
 
-variable "cidr_blocks" {
-  description = "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16"
-  default = {
-    qd   = "192.168.1.0/24" # cn-qingdao       northchina-1
-    bj   = "192.168.2.0/24" # cn-beijing       northchina-2
-    zjk  = "192.168.3.0/24" # cn-zhangjiakou   northchina-3
-    hhht = "192.168.4.0/24" # cn-huhehaote     northchina-4
-    hz   = "192.168.5.0/24" # cn-hangzhou      eastchina-1
-    sh   = "192.168.6.0/24" # cn-shanghai      eastchina-2
-    cd   = "192.168.7.0/24" # cn-chengdu       southwest-1
-    hk   = "192.168.8.0/24" # cn-hkongkong     HongKong
-
-    tyo = "192.168.9.0/24" # ap-northeast-1   Tokyo - Japana
-    sg  = "192.168.9.0/24" # ap-southeast-2   Singapore
-    kl  = "192.168.9.0/24" # ap-southeast-3   Kuala Lumpur - Malaysia
-    jk  = "192.168.9.0/24" # ap-southeast-5   Jakarta - Indonesia
-    bom = "192.168.9.0/24" # ap-south-1       Bombay - India
-
-    usva = "192.168.9.0/24" # us-east-1        Virginia - US
-    ussv = "192.168.9.0/24" # us-east-1        Silicon Valley - US
-
-    ldn = "192.168.9.0/24" # eu-west-1        London - UK 
-    ffm = "192.168.9.0/24" # eu-central-1     Frankfurt - France 
-
-    dxb = "192.168.9.0/24" # me-east-1        Dubai - UThe United Arab EmiratesK
-  }
+variable "shared_credentials_file" {
+  description = "(Deprecated from version 1.9.0) This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used."
+  type        = string
+  default     = ""
 }
 
-variable "motd" {
-  default = [
-    "+++++++++++++++++++++++++++++++++++++++++++++++++++++",
-    "+                                                   +",
-    "+   The motd is just a advertisement.               +",
-    "+   I'm sorry about that, but we really need you.   +",
-    "+   Please let me know if you are interested.       +",
-    "+                                                   +",
-    "+                              Thanks for support!  +",
-    "+                         by ihanyouqing@gmail.com  +",
-    "+                                                   +",
-    "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-  ]
+variable "skip_region_validation" {
+  description = "(Deprecated from version 1.9.0) Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet)."
+  type        = bool
+  default     = false
 }
 
+# VPC variables
+variable "create" {
+  description = "Whether to create vpc. If false, you can specify an existing vpc by setting 'vpc_id'."
+  type        = bool
+  default     = true
+}
+
+variable "vpc_id" {
+  description = "The vpc id used to launch several vswitches. If set, the 'create' will be ignored."
+  type        = string
+  default     = ""
+}
+
+variable "vpc_name" {
+  description = "The vpc name used to launch a new vpc."
+  type        = string
+  default     = "TF-VPC"
+}
+
+variable "vpc_description" {
+  description = "The vpc description used to launch a new vpc."
+  type        = string
+  default     = "A new VPC created by Terrafrom module terraform-alicloud-vpc"
+}
+
+variable "vpc_cidr" {
+  description = "The cidr block used to launch a new vpc."
+  type        = string
+  default     = "172.16.0.0/12"
+}
+
+variable "resource_group_id" {
+  description = "The Id of resource group which the instance belongs."
+  type        = string
+  default     = ""
+}
+
+variable "vpc_name_regex" {
+  description = "(Deprecated) It has been deprecated from 1.5.0."
+  type        = string
+  default     = ""
+}
+
+variable "vpc_tags" {
+  description = "The tags used to launch a new vpc. Before 1.5.0, it used to retrieve existing VPC."
+  type        = map(string)
+  default     = {}
+}
+
+# VSwitch variables
+variable "vswitch_cidrs" {
+  description = "List of cidr blocks used to launch several new vswitches. If not set, there is no new vswitches will be created."
+  type        = list(string)
+  default     = []
+}
+
+variable "availability_zones" {
+  description = "List available zones to launch several VSwitches."
+  type        = list(string)
+  default     = []
+}
+
+variable "vswitch_name" {
+  description = "The vswitch name prefix used to launch several new vswitches."
+  default     = "TF-VSwitch"
+}
+
+variable "use_num_suffix" {
+  description = "Always append numerical suffix(like 001, 002 and so on) to vswitch name, even if the length of `vswitch_cidrs` is 1"
+  type        = bool
+  default     = false
+}
+
+variable "vswitch_description" {
+  description = "The vswitch description used to launch several new vswitch."
+  type        = string
+  default     = "New VSwitch created by Terrafrom module terraform-alicloud-vpc."
+}
+
+variable "vswitch_tags" {
+  description = "The tags used to launch serveral vswitches."
+  type        = map(string)
+  default     = {}
+}
+
+// According to the vswitch cidr blocks to launch several vswitches
+variable "destination_cidrs" {
+  description = "List of destination CIDR block of virtual router in the specified VPC."
+  type        = list(string)
+  default     = []
+}
+
+variable "nexthop_ids" {
+  description = "List of next hop instance IDs of virtual router in the specified VPC."
+  type        = list(string)
+  default     = []
+}

@@ -1,7 +1,8 @@
 
 # variables for common
-region      = "cn-shanghai"
-region_abbr = "sh"
+region         = "cn-shanghai"
+region_abbr    = "sh"
+project_prefix = "nsb_project"
 
 tags = {
   environment = "testing" # develop|testing|staging|production
@@ -23,6 +24,9 @@ vpc_whitelist_ips       = "106.38.171.130"
 vpc_sg_policy_ssh       = "accept" # accept|drop
 vpc_sg_policy_http      = "accept"
 vpc_sg_policy_https     = "drop"
+
+
+
 
 
 
