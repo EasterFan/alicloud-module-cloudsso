@@ -3,7 +3,7 @@ variable "project_info" {
     prefix = string
   })
   default = {
-    prefix = "NSB"
+    prefix = "GG"
   }
 }
 
