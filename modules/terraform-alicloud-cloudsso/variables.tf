@@ -213,7 +213,7 @@ variable "sso_users" {
     {
       group_name   = "GG-Log"
       user_name    = "fandongfang"
-      display_name = "樊东方"
+      display_name = "fandongfang"
       comments     = "云sso用户"
     },
     {
