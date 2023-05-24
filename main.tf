@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "alicloud" {
-  alias      = "master_account_1129140695538589"
+  alias      = "master_account_123"
   access_key = var.access_key
   secret_key = var.secret_key
   region     = "cn-shanghai"
@@ -16,14 +16,14 @@ provider "alicloud" {
 
 module "resource_manager" {
   providers = {
-    alicloud = alicloud.master_account_1129140695538589
+    alicloud = alicloud.master_account_123
   }
   source = "./modules/terraform-alicloud-resource_manager-ing"
 }
 
 module "cloudsso" {
   providers = {
-    alicloud = alicloud.master_account_1129140695538589
+    alicloud = alicloud.master_account_123
   }
   source     = "./modules/terraform-alicloud-cloudsso"
   depends_on = [module.resource_manager]
