@@ -177,7 +177,7 @@ data "alicloud_cloud_sso_directories" "get_sso_directories" {
 
 
 resource "alicloud_cloud_sso_directory" "fdf-cloudsso-directory" {
-  count          = length(data.alicloud_cloud_sso_directories.get_sso_directories.ids) > 0 ? 0 : 1
+  /* count          = length(data.alicloud_cloud_sso_directories.get_sso_directories.ids) > 0 ? 0 : 1 */
   directory_name = "fdf-cloudsso-directory"
   depends_on     = [data.alicloud_cloud_sso_service.open]
 }
