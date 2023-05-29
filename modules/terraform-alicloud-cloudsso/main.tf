@@ -41,8 +41,8 @@ data "alicloud_resource_manager_accounts" "default" {
 resource "alicloud_cloud_sso_access_configuration_provisioning" "provisioning" {
   depends_on = [alicloud_cloud_sso_access_configuration.sso_custom_access, alicloud_cloud_sso_access_configuration.sso_system_access, alicloud_cloud_sso_group.sso_user_group]
   for_each = {
-    for relation_config in local.sso_relation_configs :
-    "${relation_config.account_name}:${relation_config.relation_name}:${relation_config.deploy_target_type}:${relation_config.deploy_target_name}" => relation_config
+    for index, relation_config in local.sso_relation_configs :
+    index => relation_config
   }
 
   directory_id            = local.directory_id
