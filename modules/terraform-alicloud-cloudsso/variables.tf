@@ -39,7 +39,7 @@ variable "sso_access_relation_name" {
         {
           target_type        = "User"
           target_name        = "fandongfang"
-          deploy_access_list = ["Administrator"]
+          deploy_access_list = ["DevOpsAdmin", "FinaceAdmin"]
       }]
     }
   }
